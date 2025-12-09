@@ -65,9 +65,108 @@ let editingEntryId = null;
 
 // If you ever wanna add more prompts, shove them in here:
 const PROMPTS = [
-  // "Example prompt 1",
-  // "Example prompt 2"
+"What emotion sat with you the longest today, and why?",
+"What’s one thing you handled better today than you would’ve a year ago?",
+"Who crossed your mind today, and what feeling came with that?",
+"What’s something you didn’t say today but kinda wish you did?",
+"What moment today felt the most peaceful?",
+"What drained your mental energy the most today?",
+"What’s one thing you avoided today? Why?",
+"What surprised you about yourself today?",
+"What is a thought you couldn’t shake today?",
+"What did you learn about yourself recently?",
+"What would younger you be proud of today?",
+"What did your body feel like today (tense, tired, restless, calm)?",
+"What’s one thing you want to leave behind after today?",
+"What’s one thing you want to bring with you into tomorrow?",
+"What emotion are you pretending you don’t feel right now?",
+"What helped your mood today, even a little?",
+"What’s a small victory you want to remember?",
+"What felt harder than it should’ve today?",
+"What are you grateful for that you usually overlook?",
+"What’s something you’re trying to change about yourself?",
+"Who made your day better today, even slightly?",
+"What’s something you wish other people understood about you?",
+"What’s one thing that scared you today?",
+"What did you do today that took courage?",
+"What is something you want to forgive yourself for?",
+"What’s a thought you need to write down just to stop carrying it?",
+"What made you smile today, even if it was tiny?",
+"What’s one thing you’re proud you didn’t give up on?",
+"What emotion are you feeling right now, honestly?",
+"What’s something you can do tomorrow to be kinder to yourself?",
+"What emotion defined your morning?",
+"What emotion defined your night?",
+"What moment felt like a wake-up call?",
+"What did you push through today?",
+"What made you unexpectedly sad today?",
+"What were you secretly proud of?",
+"What made you uncomfortable today?",
+"What made you feel powerful today?",
+"What conversation replayed in your head?",
+"What gave you a spark of excitement?",
+"What’s something you feared today?",
+"What made you feel ignored?",
+"What made you feel valued?",
+"What’s one thing you pretended didn’t bother you?",
+"What memory hit you out of nowhere?",
+"What did you crave emotionally today?",
+"What helped you stay patient?",
+"What destroyed your patience?",
+"What made you rethink something?",
+"What’s something you're holding onto too tightly?",
+"What’s something you let go of today?",
+"What new thought showed up?",
+"What old thought returned?",
+"What are you avoiding admitting?",
+"What felt overwhelming?",
+"What felt easy?",
+"What are you low-key grateful for?",
+"What did you judge yourself for?",
+"What helped you stay calm?",
+"What shook your confidence?",
+"What boosted your confidence?",
+"What made you feel alive for a moment?",
+"What do you want to feel more often?",
+"What do you want to feel less often?",
+"What’s something you want to ask future you?",
+"What felt unfair today?",
+"What felt perfectly timed?",
+"What hurt your feelings?",
+"What surprised you emotionally?",
+"What made you laugh harder than expected?",
+"What felt draining?",
+"What felt healing?",
+"What did you misinterpret?",
+"What did someone misunderstand about you?",
+"What’s one thing you wish you handled differently?",
+"What’s one thing you handled perfectly?",
+"What did you learn about your mind?",
+"What did you learn about your heart?",
+"What did you learn about your limits?",
+"What did you hide today?",
+"What did you reveal today?",
+"What annoyed you but you stayed polite?",
+"What gave you peace?",
+"What made you mentally shut down?",
+"What triggered your anxiety?",
+"What eased your anxiety?",
+"What made you overthink?",
+"What helped you not overthink?",
+"What emotion did you swallow instead of express?",
+"What did you assume incorrectly?",
+"What moment caught you off guard?",
+"What gave you clarity?",
+"What confused you more?",
+"What did you wish someone noticed?",
+"What’s something you need to vent?",
+"What moment today tested your self-control?",
+"What moment made you want to disappear?",
+"What helped you feel grounded?",
+"What made you feel unstable?",
+"What are you secretly proud of surviving?"
 ];
+
 
 // ---- Lock screen ----
 
@@ -274,13 +373,21 @@ async function saveEntriesToFile() {
 
 function updateFileStatus() {
   if (!fileHandle) {
-    fileStatus.innerHTML = '<span class="file-status-strong">No file connected</span>';
-    return;
+    fileStatus.innerHTML =
+      '<span class="file-status-strong file-status-disconnected">● No file connected – entries are not saved</span>';
+  } else {
+    fileStatus.innerHTML =
+      '<span class="file-status-strong file-status-connected">● Connected:</span> ' +
+      (fileHandle.name || "mood-entries.json");
   }
-  fileStatus.innerHTML =
-    '<span class="file-status-strong">Connected:</span> ' +
-    (fileHandle.name || "mood-entries.json");
+
+  // we'll use this soon for the warning banner
+  const warn = document.getElementById("noFileWarning");
+  if (warn) {
+    warn.style.display = fileHandle ? "none" : "block";
+  }
 }
+
 
 // ---- UI + logic ----
 

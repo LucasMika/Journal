@@ -159,6 +159,15 @@ header span {
   font-weight: 500;
 }
 
+.file-status-disconnected {
+  color: #fecaca;
+}
+
+.file-status-connected {
+  color: #bbf7d0;
+}
+
+
 /* Layout */
 
 main {
@@ -750,12 +759,24 @@ textarea {
   margin-top: 0;
   margin-bottom: 0.5rem;
   font-size: 1.05rem;
+  color: #f3f4f6;  /* brighter high-contrast text */
+  font-weight: 600;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.45);
+
 }
+
 
 .modal .subtext {
   margin-bottom: 0.8rem;
   font-size: 0.85rem;
+  color: #e5e7eb; /* make modal helper text brighter */
 }
+
+.modal label span {
+  color: #e5e7eb;
+  font-weight: 500;
+}
+
 
 #pwModalError {
   font-size: 0.8rem;
@@ -921,3 +942,15 @@ textarea {
     opacity: 0.9;
   }
 }
+
+.no-file-warning {
+  margin-top: 0.8rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.6rem;
+  background: rgba(153, 27, 27, 0.2);
+  border: 1px solid #7f1d1d;
+  color: #fecaca;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
